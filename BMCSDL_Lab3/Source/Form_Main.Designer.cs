@@ -1,4 +1,5 @@
-﻿namespace BMCSDL_Lab3.Source
+﻿
+namespace BMCSDL_Lab3.Source
 {
     partial class Form_Main
     {
@@ -28,130 +29,150 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btn_studentlist = new System.Windows.Forms.Button();
-            this.btn_nhapdiem = new System.Windows.Forms.Button();
-            this.panel_childform = new System.Windows.Forms.Panel();
             this.panel_menu = new System.Windows.Forms.Panel();
+            this.btn_modifyStudent = new System.Windows.Forms.Button();
+            this.btn_scoreInput = new System.Windows.Forms.Button();
+            this.btn_studentList = new System.Windows.Forms.Button();
+            this.panel_uname = new System.Windows.Forms.Panel();
             this.btn_logout = new System.Windows.Forms.Button();
             this.label_uname = new System.Windows.Forms.Label();
-            this.panel_uname = new System.Windows.Forms.Panel();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel_childform = new System.Windows.Forms.Panel();
             this.panel_menu.SuspendLayout();
             this.panel_uname.SuspendLayout();
             this.SuspendLayout();
             // 
-            // btn_studentlist
-            // 
-            this.btn_studentlist.AutoSize = true;
-            this.btn_studentlist.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.btn_studentlist.Location = new System.Drawing.Point(0, 21);
-            this.btn_studentlist.Name = "btn_studentlist";
-            this.btn_studentlist.Size = new System.Drawing.Size(238, 50);
-            this.btn_studentlist.TabIndex = 2;
-            this.btn_studentlist.Text = "Danh sách sinh viên";
-            this.btn_studentlist.UseVisualStyleBackColor = false;
-            this.btn_studentlist.Click += new System.EventHandler(this.btn_StudentList_Click);
-            // 
-            // btn_nhapdiem
-            // 
-            this.btn_nhapdiem.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.btn_nhapdiem.Location = new System.Drawing.Point(0, 104);
-            this.btn_nhapdiem.Name = "btn_nhapdiem";
-            this.btn_nhapdiem.Size = new System.Drawing.Size(162, 50);
-            this.btn_nhapdiem.TabIndex = 3;
-            this.btn_nhapdiem.Text = "Nhập điểm";
-            this.btn_nhapdiem.UseVisualStyleBackColor = false;
-            // 
-            // panel_childform
-            // 
-            this.panel_childform.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel_childform.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.panel_childform.Location = new System.Drawing.Point(0, 160);
-            this.panel_childform.Name = "panel_childform";
-            this.panel_childform.Size = new System.Drawing.Size(1082, 740);
-            this.panel_childform.TabIndex = 4;
-            // 
             // panel_menu
             // 
-            this.panel_menu.Controls.Add(this.btn_nhapdiem);
-            this.panel_menu.Controls.Add(this.btn_studentlist);
-            this.panel_menu.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel_menu.Location = new System.Drawing.Point(0, 160);
+            this.panel_menu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(58)))));
+            this.panel_menu.Controls.Add(this.btn_modifyStudent);
+            this.panel_menu.Controls.Add(this.btn_scoreInput);
+            this.panel_menu.Controls.Add(this.btn_studentList);
+            this.panel_menu.Location = new System.Drawing.Point(0, 122);
             this.panel_menu.Name = "panel_menu";
-            this.panel_menu.Size = new System.Drawing.Size(180, 740);
-            this.panel_menu.TabIndex = 5;
+            this.panel_menu.Size = new System.Drawing.Size(173, 377);
+            this.panel_menu.TabIndex = 0;
+            // 
+            // btn_modifyStudent
+            // 
+            this.btn_modifyStudent.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(58)))));
+            this.btn_modifyStudent.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btn_modifyStudent.FlatAppearance.BorderSize = 0;
+            this.btn_modifyStudent.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_modifyStudent.Font = new System.Drawing.Font("Segoe UI", 10.8F);
+            this.btn_modifyStudent.ForeColor = System.Drawing.Color.White;
+            this.btn_modifyStudent.Location = new System.Drawing.Point(0, 131);
+            this.btn_modifyStudent.Name = "btn_modifyStudent";
+            this.btn_modifyStudent.Size = new System.Drawing.Size(173, 110);
+            this.btn_modifyStudent.TabIndex = 2;
+            this.btn_modifyStudent.Text = "Chỉnh sử thông tin sinh viên";
+            this.btn_modifyStudent.UseVisualStyleBackColor = true;
+            // 
+            // btn_scoreInput
+            // 
+            this.btn_scoreInput.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(58)))));
+            this.btn_scoreInput.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btn_scoreInput.FlatAppearance.BorderSize = 0;
+            this.btn_scoreInput.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_scoreInput.Font = new System.Drawing.Font("Segoe UI", 10.8F);
+            this.btn_scoreInput.ForeColor = System.Drawing.Color.White;
+            this.btn_scoreInput.Location = new System.Drawing.Point(0, 72);
+            this.btn_scoreInput.Name = "btn_scoreInput";
+            this.btn_scoreInput.Size = new System.Drawing.Size(173, 59);
+            this.btn_scoreInput.TabIndex = 1;
+            this.btn_scoreInput.Text = "Nhập điểm";
+            this.btn_scoreInput.UseVisualStyleBackColor = false;
+            // 
+            // btn_studentList
+            // 
+            this.btn_studentList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(58)))));
+            this.btn_studentList.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btn_studentList.FlatAppearance.BorderSize = 0;
+            this.btn_studentList.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_studentList.Font = new System.Drawing.Font("Segoe UI", 10.8F);
+            this.btn_studentList.ForeColor = System.Drawing.Color.White;
+            this.btn_studentList.Location = new System.Drawing.Point(0, 0);
+            this.btn_studentList.Name = "btn_studentList";
+            this.btn_studentList.Size = new System.Drawing.Size(173, 72);
+            this.btn_studentList.TabIndex = 0;
+            this.btn_studentList.Text = "Danh sách sinh viên";
+            this.btn_studentList.UseVisualStyleBackColor = false;
+            this.btn_studentList.Click += new System.EventHandler(this.btn_StudentList_Click);
+            // 
+            // panel_uname
+            // 
+            this.panel_uname.AllowDrop = true;
+            this.panel_uname.BackColor = System.Drawing.Color.Gainsboro;
+            this.panel_uname.Controls.Add(this.btn_logout);
+            this.panel_uname.Controls.Add(this.label_uname);
+            this.panel_uname.Location = new System.Drawing.Point(0, 0);
+            this.panel_uname.Name = "panel_uname";
+            this.panel_uname.Size = new System.Drawing.Size(173, 122);
+            this.panel_uname.TabIndex = 2;
             // 
             // btn_logout
             // 
-            this.btn_logout.AutoSize = true;
-            this.btn_logout.Location = new System.Drawing.Point(47, 65);
+            this.btn_logout.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(86)))), ((int)(((byte)(187)))), ((int)(((byte)(241)))));
+            this.btn_logout.Font = new System.Drawing.Font("Segoe UI", 10.8F);
+            this.btn_logout.Location = new System.Drawing.Point(34, 57);
             this.btn_logout.Name = "btn_logout";
-            this.btn_logout.Size = new System.Drawing.Size(99, 42);
-            this.btn_logout.TabIndex = 0;
+            this.btn_logout.Size = new System.Drawing.Size(99, 41);
+            this.btn_logout.TabIndex = 1;
             this.btn_logout.Text = "Logout";
-            this.btn_logout.UseVisualStyleBackColor = true;
+            this.btn_logout.UseVisualStyleBackColor = false;
             this.btn_logout.Click += new System.EventHandler(this.btn_logout_Click);
             // 
             // label_uname
             // 
-            this.label_uname.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label_uname.AutoSize = true;
             this.label_uname.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.label_uname.Location = new System.Drawing.Point(913, 112);
+            this.label_uname.Location = new System.Drawing.Point(39, 12);
             this.label_uname.Name = "label_uname";
-            this.label_uname.Size = new System.Drawing.Size(117, 32);
-            this.label_uname.TabIndex = 1;
-            this.label_uname.Text = "NO USER";
+            this.label_uname.Size = new System.Drawing.Size(104, 32);
+            this.label_uname.TabIndex = 2;
+            this.label_uname.Text = "No user";
             this.label_uname.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // panel_uname
+            // panel_childform
             // 
-            this.panel_uname.Controls.Add(this.panel1);
-            this.panel_uname.Controls.Add(this.label_uname);
-            this.panel_uname.Controls.Add(this.btn_logout);
-            this.panel_uname.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel_uname.Location = new System.Drawing.Point(0, 0);
-            this.panel_uname.Name = "panel_uname";
-            this.panel_uname.Size = new System.Drawing.Size(1082, 160);
-            this.panel_uname.TabIndex = 1;
-            // 
-            // panel1
-            // 
-            this.panel1.Location = new System.Drawing.Point(3, 41);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(162, 116);
-            this.panel1.TabIndex = 5;
+            this.panel_childform.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.panel_childform.Location = new System.Drawing.Point(173, 0);
+            this.panel_childform.Name = "panel_childform";
+            this.panel_childform.Size = new System.Drawing.Size(797, 499);
+            this.panel_childform.TabIndex = 2;
+            this.panel_childform.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_childform_paint);
             // 
             // Form_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 32F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1082, 900);
-            this.Controls.Add(this.panel_menu);
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(940, 499);
             this.Controls.Add(this.panel_childform);
+            this.Controls.Add(this.panel_menu);
             this.Controls.Add(this.panel_uname);
+            this.Load += new System.EventHandler(this.Form_Main_Load);
             this.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form_Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Main";
-            this.Load += new System.EventHandler(this.Form_Main_Load);
             this.panel_menu.ResumeLayout(false);
-            this.panel_menu.PerformLayout();
             this.panel_uname.ResumeLayout(false);
             this.panel_uname.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
+
         #endregion
-        private System.Windows.Forms.Button btn_studentlist;
-        private System.Windows.Forms.Button btn_nhapdiem;
-        private System.Windows.Forms.Panel panel_childform;
+
         private System.Windows.Forms.Panel panel_menu;
-        private System.Windows.Forms.Button btn_logout;
-        private System.Windows.Forms.Label label_uname;
         private System.Windows.Forms.Panel panel_uname;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label_uname;
+        private System.Windows.Forms.Button btn_studentList;
+        private System.Windows.Forms.Button btn_logout;
+        private System.Windows.Forms.Button btn_scoreInput;
+        private System.Windows.Forms.Panel panel_childform;
+        private System.Windows.Forms.Button btn_modifyStudent;
     }
 }

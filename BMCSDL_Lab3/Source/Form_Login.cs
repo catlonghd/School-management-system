@@ -48,14 +48,14 @@ namespace BMCSDL_Lab3
 
             uname = textBox_uname.Text;
             passwd = textBox_passwd.Text;
-            SqlCommand cmd = new SqlCommand("SELECT * FROM NHANVIEN WHERE TENDN='" + uname + "' AND MATKHAU=HASHBYTES('MD5','" + passwd + "')", Functions.conn);
+            SqlCommand cmd = new SqlCommand("SELECT TENDN, MATKHAU FROM NHANVIEN WHERE TENDN='" + uname + "' AND MATKHAU=HASHBYTES('SHA1',N'" + passwd + "')", Functions.conn);
 
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             
             DataTable dt = new DataTable("NHANVIEN");
 
             da.Fill(dt);
-
+            
             if (dt.Rows.Count > 0)
             {
                 this.Close();

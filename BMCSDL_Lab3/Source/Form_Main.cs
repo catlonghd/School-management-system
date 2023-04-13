@@ -23,6 +23,12 @@ namespace BMCSDL_Lab3.Source
             label_uname.Text = uname;
         }
 
+        private void Form_Main_Load(object sender, EventArgs e)
+        {
+            
+           Set_Center_Username();
+        }
+
         //mở một form con
         private Form activeForm = null;
         private void MDIChildForm(Form childForm)
@@ -67,10 +73,8 @@ namespace BMCSDL_Lab3.Source
             label_uname.Location = new Point(x, y - 15);
             // label_welcome.Location = new Point(x,y-40);
         }
-        private void Form_Main_Load(object sender, EventArgs e)
-        {
-            //Set_Center_Username();
-        }
+
+        private void panel_childform_paint(object sender, PaintEventArgs e) { }
 
         
     }

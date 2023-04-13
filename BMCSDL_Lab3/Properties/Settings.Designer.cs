@@ -32,5 +32,15 @@ namespace BMCSDL_Lab3.Properties {
                 return ((string)(this["QLSVConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=LGG-TH-01\\DANG;Initial Catalog=QLSVNhom;Integrated Security=True")]
+        public string QLSVNhomConnectionString {
+            get {
+                return ((string)(this["QLSVNhomConnectionString"]));
+            }
+        }
     }
 }

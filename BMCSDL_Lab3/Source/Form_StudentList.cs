@@ -13,47 +13,34 @@ namespace BMCSDL_Lab3.Source
 {
     public partial class Form_StudentList : Form
     {
+        
         public Form_StudentList()
         {
             InitializeComponent();
+            Functions.InitConnection();
+            List<string> classNames = new List<string>();
+            using (SqlCommand cmd = new SqlCommand("class_list", Functions.conn))
+            {
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                        classNames.Add(dr["MALOP"].ToString());
+                }
+            }
+            
+            comboBox1.DataSource = classNames;
         }
-
-        private void LoadData_StudentList()
+        
+        private DataTable LoadData_StudentList(string classname)
         {
-            SqlCommand cmd = new SqlCommand("SELECT MASV, HOTEN, NGAYSINH, DIACHI, MALOP, TENDN, MATKHAU FROM SINHVIEN", Functions.conn);
+            SqlCommand cmd = new SqlCommand("student_list '" + classname + "'", Functions.conn);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
             da.Fill(dt);
             dataGridView_StudentList.DataSource = dt;
 
-            //Set font và tên cột
-            dataGridView_StudentList.Font = new Font("Time New Roman", 8);
-            dataGridView_StudentList.Columns[0].HeaderText = "Mã SV";
-            dataGridView_StudentList.Columns[1].HeaderText = "Họ tên";
-            dataGridView_StudentList.Columns[2].HeaderText = "Ngày sinh";
-            dataGridView_StudentList.Columns[3].HeaderText = "Địa chỉ";
-            dataGridView_StudentList.Columns[4].HeaderText = "Mã lớp";
-            dataGridView_StudentList.Columns[5].HeaderText = "Tên đăng nhập";
-            dataGridView_StudentList.Columns[6].HeaderText = "Mật khẩu";
-
-            //Set font cho dữ liệu trong cột
-            dataGridView_StudentList.DefaultCellStyle.Font = new Font("Time New Roman", 8);
-
-            //Set kích thước cột
-            dataGridView_StudentList.Columns[0].Width = 50;
-            dataGridView_StudentList.Columns[1].Width = 100;
-            dataGridView_StudentList.Columns[2].Width = 100;
-            dataGridView_StudentList.Columns[3].Width = 150;
-            dataGridView_StudentList.Columns[4].Width = 50;
-            dataGridView_StudentList.Columns[5].Width = 100;
-            dataGridView_StudentList.Columns[6].Width = 150;
-
-            
-        }
-        private void Form_StudentList_Load(object sender, EventArgs e)
-        {
-            LoadData_StudentList();
-        }
+            return dt;
+        }  
 
         private void DataGridView_DataError(object sender, DataGridViewDataErrorEventArgs anError)
         {
@@ -87,30 +74,13 @@ namespace BMCSDL_Lab3.Source
             }
         }
 
-        private void comboBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboBox1_SelectionChanged(object sender, EventArgs e)
         {
-            Label l = new Label();
-            l.Location = new Point(222, 80);
-            l.Size = new Size(99, 18);
-            l.Text = "Select Id";
+            string className = comboBox1.SelectedItem.ToString();
 
-            // Adding this label to the form
-            this.Controls.Add(l);
+            DataTable data = LoadData_StudentList(className);
 
-            // Creating and setting the properties of comboBox
-            ComboBox mybox = new ComboBox();
-            mybox.Location = new Point(327, 77);
-            mybox.Size = new Size(216, 26);
-            mybox.MaxLength = 3;
-            mybox.DropDownStyle = ComboBoxStyle.DropDown;
-            mybox.Items.Add(240);
-            mybox.Items.Add(241);
-            mybox.Items.Add(242);
-            mybox.Items.Add(243);
-            mybox.Items.Add(244);
-
-            // Adding this ComboBox to the form
-            this.Controls.Add(mybox);
+            bindingSource.DataSource = data;
         }
     }
 }

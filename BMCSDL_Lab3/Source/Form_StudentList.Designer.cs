@@ -34,6 +34,8 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_StudentList)).BeginInit();
+            this.bindingSource = new System.Windows.Forms.BindingSource();
+            dataGridView_StudentList.DataSource = this.bindingSource;
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -44,7 +46,7 @@
             this.dataGridView_StudentList.Name = "dataGridView_StudentList";
             this.dataGridView_StudentList.RowHeadersWidth = 62;
             this.dataGridView_StudentList.RowTemplate.Height = 28;
-            this.dataGridView_StudentList.Size = new System.Drawing.Size(837, 501);
+            this.dataGridView_StudentList.Size = new System.Drawing.Size(970, 600);
             this.dataGridView_StudentList.TabIndex = 1;
             // 
             // panel1
@@ -69,13 +71,13 @@
             // 
             // comboBox1
             // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(541, 47);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 28);
             this.comboBox1.TabIndex = 2;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox_SelectedIndexChanged);
-            this.comboBox1.DropDownStyleChanged += new System.EventHandler(this.comboBox_SelectedIndexChanged);
+            this.comboBox1.SelectionChangeCommitted += new System.EventHandler(this.comboBox1_SelectionChanged);
             // 
             // label1
             // 
@@ -93,7 +95,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(837, 600);
+            this.ClientSize = new System.Drawing.Size(797, 499);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.dataGridView_StudentList);
             this.Name = "Form_StudentList";
@@ -112,5 +114,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.BindingSource bindingSource;
     }
 }
