@@ -79,34 +79,27 @@ GO
 -- procedure list class
 create or alter procedure class_list
 as
-	DECLARE cur CURSOR 
-	FOR	SELECT * FROM LOP
-	OPEN cur
-	FETCH NEXT FROM cur
-	CLOSE cur
-	DEALLOCATE cur
+BEGIN 
+	SELECT * FROM LOP
+END;
 GO
 
 --INSERT INTO LOP VALUES('l1', 'lop 1', 'NV01')
 --DELETE FROM LOP WHERE Malop = 'l1' 
-EXEC class_list
+--EXEC class_list
 GO
 
+--STUDENT OF CLASS THAT BELONG TO NHANVIEN
 create or alter procedure class_list_nhanvien(
 	@MANV VARCHAR(20)
 )
 as
-	DECLARE cur CURSOR 
-	FOR	SELECT sv.masv as 'Mã sinh viên', sv.hoten as 'Họ tên', sv.ngaysinh as 'Ngày sinh', sv.diachi as 'Địa chỉ', sv.malop as 'Mã lớp', sv.tendn as 'Tên đăng nhập' 
+	SELECT sv.masv as 'Mã sinh viên', sv.hoten as 'Họ tên', sv.ngaysinh as 'Ngày sinh', sv.diachi as 'Địa chỉ', sv.malop as 'Mã lớp', sv.tendn as 'Tên đăng nhập' 
 		FROM SINHVIEN sv join LOP l ON sv.MALOP = l.MALOP
 		                 join NHANVIEN nv on nv.MANV = l.MANV
 		WHERE nv.MANV = @MANV;
-	OPEN cur
-	FETCH NEXT FROM cur
-	CLOSE cur
-	DEALLOCATE cur
 GO
-EXEC class_list_nhanvien 'NV01';
+--EXEC class_list_nhanvien 'NV01';
 
 GO
 
@@ -115,39 +108,31 @@ CREATE or ALTER PROCEDURE student_list(
 	@MALOP VARCHAR(20)
 )
 AS
-	DECLARE cur CURSOR 
-	FOR	SELECT masv as 'Mã sinh viên', hoten as 'Họ tên', ngaysinh as 'Ngày sinh', diachi as 'Địa chỉ', malop as 'Mã lớp', tendn as 'Tên đăng nhập' FROM SINHVIEN WHERE MALOP=@MALOP
-	OPEN cur
-	FETCH NEXT FROM cur
-	CLOSE cur
-	DEALLOCATE cur
+	SELECT masv as 'Mã sinh viên', hoten as 'Họ tên', ngaysinh as 'Ngày sinh', diachi as 'Địa chỉ', malop as 'Mã lớp', tendn as 'Tên đăng nhập' FROM SINHVIEN WHERE MALOP=@MALOP
 GO
 
-EXEC student_list 'CNTT-K35'
+--EXEC student_list 'CNTT-K35'
 GO
 
 -- procedure update student
-CREATE or ALTER PROCEDURE student_update(
+CREATE OR ALTER PROCEDURE student_update_info(
 	@MaNV varchar(20),
 	@MaSV NVARCHAR(20),
     @HOTEN as NVARCHAR(100) = NULL,
     @NGAYSINH as DATETIME = NULL,
     @DIACHI as NVARCHAR(200) = NULL,
     @MALOP as VARCHAR(20) = NULL,
-    @TENDN as NVARCHAR(100) = NULL,
-    @MAHP as VARCHAR(20) = NULL,
-    @DIEM as INT = NULL
+    @TENDN as NVARCHAR(100) = NULL
 )
 AS
     BEGIN
+	-- CHECK RELATIONSHIP SV VS NV
         DECLARE cur CURSOR
-        FOR SELECT NV.MANV, SV.MASV, SV.HOTEN, SV.NGAYSINH, SV.DIACHI, SV.MALOP, SV.TENDN, D.MAHP, D.DIEMTHI
-            FROM SINHVIEN SV JOIN BANGDIEM D ON SV.MASV = D.MASV
-                JOIN LOP ON SV.MALOP = LOP.MALOP
+        FOR SELECT NV.MANV, SV.MASV, SV.HOTEN, SV.NGAYSINH, SV.DIACHI, SV.MALOP, SV.TENDN
+            FROM SINHVIEN SV JOIN LOP ON SV.MALOP = LOP.MALOP
                 JOIN NHANVIEN NV ON NV.MANV = LOP.MANV
             WHERE SV.MASV = @MaSV AND NV.MANV = @MaNV
     END
-
     -- update if not null
     BEGIN
         -- UPDATE INFO
@@ -163,21 +148,63 @@ AS
 				UPDATE SINHVIEN SET DIACHI = @DIACHI WHERE MASV = @MaSV
 			IF @TENDN IS NOT NULL
 				UPDATE SINHVIEN SET TENDN = @TENDN WHERE MASV = @MaSV
-			-- UPDATE SCORE
-			IF @DIEM IS NOT NULL AND @MAHP IS NOT NULL
-			BEGIN
-				DECLARE @encryptedScore VARBINARY(2048)
-				SET @encryptedScore = ENCRYPTBYASYMKEY(ASYMKEY_ID(@MANV), CONVERT(VARCHAR(20), @DIEM))
-				UPDATE BANGDIEM SET DIEMTHI = @encryptedScore WHERE MASV = @MaSV AND MAHP = @MAHP
-			END
 		END
-        CLOSE cur
         DEALLOCATE cur   
     END
 GO
 
-EXEC student_update 'NV01', 'SV01', NULL, NULL, 'cp525ck', NULL, NULL, 'HP2', 10 
+--EXEC student_update_info 'NV01', 'SV01', NULL, NULL, 'cp525ck', NULL, NULL, 'HP2', 10 
 
+GO
+CREATE OR ALTER PROCEDURE student_score_list(
+	@MaNV varchar(20),
+	@MK nvarchar(20)
+)
+AS
+	SELECT
+		SV.MASV as N'Mã sinh viên',
+		BD.MAHP as N'Mã học phần',
+		CONVERT(VARCHAR(64),
+			DECRYPTBYASYMKEY(ASYMKEY_ID(@MANV),
+				BD.DiemThi, CONVERT(NVARCHAR(20),@MK))
+		) AS N'Điểm'
+	FROM
+		NHANVIEN NV
+		JOIN LOP ON LOP.MANV = NV.MANV
+		JOIN SINHVIEN SV ON SV.MALOP = LOP.MALOP
+		JOIN BangDiem BD ON BD.MaSV = SV.MASV
+	WHERE NV.MANV = @MANV
+
+GO
+
+CREATE OR ALTER PROCEDURE student_score_insert(
+	@MaNV varchar(20),
+	@MaSV NVARCHAR(20),
+    @MAHP as VARCHAR(20),
+    @DIEM as INT
+)
+AS
+    BEGIN
+		-- CHECK SV thuoc NV
+		DECLARE _cur CURSOR
+        FOR SELECT NV.MANV, SV.MASV, SV.HOTEN, SV.MALOP
+            FROM SINHVIEN SV JOIN LOP ON SV.MALOP = LOP.MALOP
+                JOIN NHANVIEN NV ON NV.MANV = LOP.MANV
+            WHERE SV.MASV = @MaSV AND NV.MANV = @MaNV
+	END
+    -- update if not null
+    BEGIN
+        -- UPDATE INFO
+		OPEN _cur
+		FETCH NEXT FROM _cur
+		IF @@FETCH_STATUS != -1
+		BEGIN 
+			-- Insert with encrypted score
+			INSERT INTO bangdiem 
+			values (@MaSV, @MaHP, ENCRYPTBYASYMKEY(ASYMKEY_ID(@MANV), CONVERT(VARCHAR(20), @DIEM)))
+		END
+        DEALLOCATE _cur  
+    END
 GO
 
 CREATE OR ALTER PROCEDURE STUDENT_DELETE(
@@ -191,8 +218,17 @@ BEGIN
 
 END;
 GO
+CREATE OR ALTER PROCEDURE SCORE_DELETE(
+	@MASV VARCHAR(20),
+	@MAHP VARCHAR(20)
+)
+AS
+BEGIN
 
-EXEC STUDENT_DELETE 'SV05';
+	DELETE FROM BangDiem WHERE MASV = @MASV AND MaHP=@MAHP
+END;
+
+--EXEC STUDENT_DELETE 'SV05';
 
 
 		

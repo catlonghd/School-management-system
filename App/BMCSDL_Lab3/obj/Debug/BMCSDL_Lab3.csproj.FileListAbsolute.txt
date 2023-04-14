@@ -1,0 +1,15 @@
+C:\Users\thanh\source\repos\VS_work\C#\BMCSDL_Lab3_Nhom\App\BMCSDL_Lab3\bin\Debug\BMCSDL_Lab3.exe.config
+C:\Users\thanh\source\repos\VS_work\C#\BMCSDL_Lab3_Nhom\App\BMCSDL_Lab3\bin\Debug\BMCSDL_Lab3.exe
+C:\Users\thanh\source\repos\VS_work\C#\BMCSDL_Lab3_Nhom\App\BMCSDL_Lab3\bin\Debug\BMCSDL_Lab3.pdb
+C:\Users\thanh\source\repos\VS_work\C#\BMCSDL_Lab3_Nhom\App\BMCSDL_Lab3\obj\Debug\BMCSDL_Lab3.csproj.AssemblyReference.cache
+C:\Users\thanh\source\repos\VS_work\C#\BMCSDL_Lab3_Nhom\App\BMCSDL_Lab3\obj\Debug\BMCSDL_Lab3.csproj.SuggestedBindingRedirects.cache
+C:\Users\thanh\source\repos\VS_work\C#\BMCSDL_Lab3_Nhom\App\BMCSDL_Lab3\obj\Debug\BMCSDL_Lab3.Form_Login.resources
+C:\Users\thanh\source\repos\VS_work\C#\BMCSDL_Lab3_Nhom\App\BMCSDL_Lab3\obj\Debug\BMCSDL_Lab3.Properties.Resources.resources
+C:\Users\thanh\source\repos\VS_work\C#\BMCSDL_Lab3_Nhom\App\BMCSDL_Lab3\obj\Debug\BMCSDL_Lab3.Source.Form_Main.resources
+C:\Users\thanh\source\repos\VS_work\C#\BMCSDL_Lab3_Nhom\App\BMCSDL_Lab3\obj\Debug\BMCSDL_Lab3.Source.Form_modifyStudent.resources
+C:\Users\thanh\source\repos\VS_work\C#\BMCSDL_Lab3_Nhom\App\BMCSDL_Lab3\obj\Debug\BMCSDL_Lab3.Source.Form_scoreInput.resources
+C:\Users\thanh\source\repos\VS_work\C#\BMCSDL_Lab3_Nhom\App\BMCSDL_Lab3\obj\Debug\BMCSDL_Lab3.Source.Form_StudentList.resources
+C:\Users\thanh\source\repos\VS_work\C#\BMCSDL_Lab3_Nhom\App\BMCSDL_Lab3\obj\Debug\BMCSDL_Lab3.csproj.GenerateResource.cache
+C:\Users\thanh\source\repos\VS_work\C#\BMCSDL_Lab3_Nhom\App\BMCSDL_Lab3\obj\Debug\BMCSDL_Lab3.csproj.CoreCompileInputs.cache
+C:\Users\thanh\source\repos\VS_work\C#\BMCSDL_Lab3_Nhom\App\BMCSDL_Lab3\obj\Debug\BMCSDL_Lab3.exe
+C:\Users\thanh\source\repos\VS_work\C#\BMCSDL_Lab3_Nhom\App\BMCSDL_Lab3\obj\Debug\BMCSDL_Lab3.pdb
