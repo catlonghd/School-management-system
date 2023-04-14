@@ -78,11 +78,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="QLSVDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>QLSVDataSet.xsd</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="Source\Form_Login.resx">
       <DependentUpon>Form_Login.cs</DependentUpon>
     </EmbeddedResource>
@@ -98,6 +93,9 @@
     <EmbeddedResource Include="Source\Form_Main.resx">
       <DependentUpon>Form_Main.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Source\Form_modifyStudent.resx">
+      <DependentUpon>Form_modifyStudent.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Source\Form_StudentList.resx">
       <DependentUpon>Form_StudentList.cs</DependentUpon>
     </EmbeddedResource>
@@ -110,17 +108,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="QLSVDataSet.xsc">
-      <DependentUpon>QLSVDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="QLSVDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>QLSVDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="QLSVDataSet.xss">
-      <DependentUpon>QLSVDataSet.xsd</DependentUpon>
-    </None>
     <None Include="QLSVNhomDataSet.xsc">
       <DependentUpon>QLSVNhomDataSet.xsd</DependentUpon>
     </None>

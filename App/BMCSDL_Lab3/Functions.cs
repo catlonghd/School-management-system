@@ -14,7 +14,8 @@ namespace BMCSDL_Lab3
     public class Functions
     {
         public static SqlConnection conn;
-        public static string uname = "";
+        //public static string uname = "";
+        public static string manv = "";
         public static void InitConnection()
         {
             conn = new SqlConnection();

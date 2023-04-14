@@ -66,6 +66,7 @@ namespace BMCSDL_Lab3.Source
             this.btn_modifyStudent.TabIndex = 2;
             this.btn_modifyStudent.Text = "Chỉnh sử thông tin sinh viên";
             this.btn_modifyStudent.UseVisualStyleBackColor = true;
+            this.btn_modifyStudent.Click += new System.EventHandler(this.btn_modifyStudent_Click);
             // 
             // btn_scoreInput
             // 

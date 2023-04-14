@@ -48,7 +48,7 @@ namespace BMCSDL_Lab3
 
             uname = textBox_uname.Text;
             passwd = textBox_passwd.Text;
-            SqlCommand cmd = new SqlCommand("SELECT TENDN, MATKHAU FROM NHANVIEN WHERE TENDN='" + uname + "' AND MATKHAU=HASHBYTES('SHA1',N'" + passwd + "')", Functions.conn);
+            SqlCommand cmd = new SqlCommand("SELECT TENDN, MATKHAU, MANV FROM NHANVIEN WHERE TENDN='" + uname + "' AND MATKHAU=HASHBYTES('SHA1',N'" + passwd + "')", Functions.conn);
 
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             
@@ -58,6 +58,8 @@ namespace BMCSDL_Lab3
             
             if (dt.Rows.Count > 0)
             {
+                
+                Functions.manv = Convert.ToString(dt.Rows[0]["MANV"]);
                 this.Close();
                 t = new Thread(open_FormMain);
                 t.SetApartmentState(ApartmentState.STA);
