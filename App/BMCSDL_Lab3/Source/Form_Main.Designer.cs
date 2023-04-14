@@ -64,7 +64,7 @@ namespace BMCSDL_Lab3.Source
             this.btn_modifyStudent.Name = "btn_modifyStudent";
             this.btn_modifyStudent.Size = new System.Drawing.Size(173, 110);
             this.btn_modifyStudent.TabIndex = 2;
-            this.btn_modifyStudent.Text = "Chỉnh sử thông tin sinh viên";
+            this.btn_modifyStudent.Text = "Chỉnh sửa thông tin sinh viên";
             this.btn_modifyStudent.UseVisualStyleBackColor = true;
             this.btn_modifyStudent.Click += new System.EventHandler(this.btn_modifyStudent_Click);
             // 
@@ -82,6 +82,7 @@ namespace BMCSDL_Lab3.Source
             this.btn_scoreInput.TabIndex = 1;
             this.btn_scoreInput.Text = "Nhập điểm";
             this.btn_scoreInput.UseVisualStyleBackColor = false;
+            this.btn_scoreInput.Click += new System.EventHandler(this.btn_scoreInput_Click);
             // 
             // btn_studentList
             // 
@@ -151,12 +152,12 @@ namespace BMCSDL_Lab3.Source
             this.Controls.Add(this.panel_childform);
             this.Controls.Add(this.panel_menu);
             this.Controls.Add(this.panel_uname);
-            this.Load += new System.EventHandler(this.Form_Main_Load);
             this.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form_Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Main";
+            this.Load += new System.EventHandler(this.Form_Main_Load);
             this.panel_menu.ResumeLayout(false);
             this.panel_uname.ResumeLayout(false);
             this.panel_uname.PerformLayout();

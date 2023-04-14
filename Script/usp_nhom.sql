@@ -177,6 +177,25 @@ AS
 GO
 
 EXEC student_update 'NV01', 'SV01', NULL, NULL, 'cp525ck', NULL, NULL, 'HP2', 10 
+
+GO
+
+CREATE OR ALTER PROCEDURE STUDENT_DELETE(
+	@MASV VARCHAR(20)
+)
+AS
+BEGIN
+
+	DELETE FROM BangDiem WHERE MASV = @MASV;
+	DELETE FROM SINHVIEN WHERE MASV = @MASV;
+
+END;
+GO
+
+EXEC STUDENT_DELETE 'SV05';
+
+
+		
 -- View deciphered score below
 
 ------------------------

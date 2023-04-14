@@ -71,6 +71,11 @@ namespace BMCSDL_Lab3.Source
         {
             MDIChildForm(new Form_modifyStudent());
         }
+
+        private void btn_scoreInput_Click(object sender, EventArgs e)
+        {
+            MDIChildForm(new Form_scoreInput());
+        }
         private void Set_Center_Username()
         {
             int y = (panel_uname.Height / 2) - (label_uname.Height / 2);

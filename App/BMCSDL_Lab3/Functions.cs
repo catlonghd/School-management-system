@@ -16,6 +16,8 @@ namespace BMCSDL_Lab3
         public static SqlConnection conn;
         //public static string uname = "";
         public static string manv = "";
+        public static string uname = "";
+        public static string passwd = "";
         public static void InitConnection()
         {
             conn = new SqlConnection();

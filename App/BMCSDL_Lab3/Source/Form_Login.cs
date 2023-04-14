@@ -18,7 +18,7 @@ namespace BMCSDL_Lab3
     {
         
         Thread t;
-        String uname = "", passwd = "";
+       
         public Form_Login()
         {
             InitializeComponent();
@@ -38,17 +38,17 @@ namespace BMCSDL_Lab3
         public void open_FormMain(object obj)
         {
 
-            Application.Run(new Source.Form_Main(uname));
+            Application.Run(new Source.Form_Main(Functions.uname));
         }
 
         private void btn_Login_Click(object sender, EventArgs e)
         {
             Login();
 
+            Functions.uname = textBox_uname.Text;
+            Functions.passwd = textBox_passwd.Text;
 
-            uname = textBox_uname.Text;
-            passwd = textBox_passwd.Text;
-            SqlCommand cmd = new SqlCommand("SELECT TENDN, MATKHAU, MANV FROM NHANVIEN WHERE TENDN='" + uname + "' AND MATKHAU=HASHBYTES('SHA1',N'" + passwd + "')", Functions.conn);
+            SqlCommand cmd = new SqlCommand("SELECT TENDN, MATKHAU, MANV FROM NHANVIEN WHERE TENDN='" + Functions.uname + "' AND MATKHAU=HASHBYTES('SHA1',N'" + Functions.passwd + "')", Functions.conn);
 
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             

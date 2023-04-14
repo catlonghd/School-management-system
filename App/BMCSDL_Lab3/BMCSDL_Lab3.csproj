@@ -58,6 +58,12 @@
     <Compile Include="Source\Form_modifyStudent.Designer.cs">
       <DependentUpon>Form_modifyStudent.cs</DependentUpon>
     </Compile>
+    <Compile Include="Source\Form_scoreInput.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Source\Form_scoreInput.Designer.cs">
+      <DependentUpon>Form_scoreInput.cs</DependentUpon>
+    </Compile>
     <Compile Include="Source\Form_StudentList.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -95,6 +101,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Source\Form_modifyStudent.resx">
       <DependentUpon>Form_modifyStudent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Source\Form_scoreInput.resx">
+      <DependentUpon>Form_scoreInput.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Source\Form_StudentList.resx">
       <DependentUpon>Form_StudentList.cs</DependentUpon>
