@@ -21,7 +21,7 @@ namespace BMCSDL_Lab3
         public static void InitConnection()
         {
             conn = new SqlConnection();
-            conn.ConnectionString = @"Data Source=LGG-TH-01\DANG;Initial Catalog=QLSVNhom;Integrated Security=True";
+            conn.ConnectionString = @"Data Source=LAPTOP-6B1R7CJK\QUANGHOANG;Initial Catalog=QLSVNhom;Integrated Security=True";
             try { conn.Open(); }
             catch (SqlException ex){
                 conn = null;
