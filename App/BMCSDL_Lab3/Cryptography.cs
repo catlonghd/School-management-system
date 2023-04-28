@@ -36,7 +36,7 @@ namespace BMCSDL_Lab3
             UnicodeEncoding ByteConverter = new UnicodeEncoding();
             byte[] dataToEncrypt = ByteConverter.GetBytes(text);
             byte[] encryptedData;
-
+            return "111";
         }
         public static byte[] RSAEncrypt(byte[] DataToEncrypt, RSAParameters RSAKeyInfo, bool DoOAEPPadding)
         {
