@@ -31,7 +31,7 @@ namespace BMCSDL_Lab3
             }
             return hashSb.ToString();
         }
-        public static string RSA(string text)
+        public static string RSAAlg(string text)
         {
             UnicodeEncoding ByteConverter = new UnicodeEncoding();
             byte[] dataToEncrypt = ByteConverter.GetBytes(text);
@@ -44,19 +44,8 @@ namespace BMCSDL_Lab3
             {
                 byte[] encryptedData;
                 //Create a new instance of RSACryptoServiceProvider.
-                using (RSACryptoServiceProvider RSA = new RSACryptoServiceProvider())
-                {
+                RSA rsa = RSA.Create();
 
-                    //Import the RSA Key information. This only needs
-                    //toinclude the public key information.
-                    RSA.ImportParameters(RSAKeyInfo);
-                    var
-                    //Encrypt the passed byte array and specify OAEP padding.  
-                    //OAEP padding is only available on Microsoft Windows XP or
-                    //later.  
-                    encryptedData = RSA.Encrypt(DataToEncrypt, DoOAEPPadding);
-                }
-                return encryptedData;
             }
             //Catch and display a CryptographicException  
             //to the console.
