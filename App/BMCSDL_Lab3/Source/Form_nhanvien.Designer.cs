@@ -42,7 +42,6 @@
             this.label_username = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.btn_add = new System.Windows.Forms.Button();
-            this.btn_update = new System.Windows.Forms.Button();
             this.btn_delete = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -158,7 +157,7 @@
             // 
             // btn_add
             // 
-            this.btn_add.Location = new System.Drawing.Point(129, 245);
+            this.btn_add.Location = new System.Drawing.Point(218, 245);
             this.btn_add.Name = "btn_add";
             this.btn_add.Size = new System.Drawing.Size(94, 32);
             this.btn_add.TabIndex = 15;
@@ -166,19 +165,9 @@
             this.btn_add.UseVisualStyleBackColor = true;
             this.btn_add.Click += new System.EventHandler(this.btn_add_Click);
             // 
-            // btn_update
-            // 
-            this.btn_update.Location = new System.Drawing.Point(306, 245);
-            this.btn_update.Name = "btn_update";
-            this.btn_update.Size = new System.Drawing.Size(94, 32);
-            this.btn_update.TabIndex = 15;
-            this.btn_update.Text = "Sửa";
-            this.btn_update.UseVisualStyleBackColor = true;
-            this.btn_update.Click += new System.EventHandler(this.btn_update_Click);
-            // 
             // btn_delete
             // 
-            this.btn_delete.Location = new System.Drawing.Point(490, 245);
+            this.btn_delete.Location = new System.Drawing.Point(415, 245);
             this.btn_delete.Name = "btn_delete";
             this.btn_delete.Size = new System.Drawing.Size(94, 32);
             this.btn_delete.TabIndex = 15;
@@ -192,7 +181,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(797, 499);
             this.Controls.Add(this.btn_delete);
-            this.Controls.Add(this.btn_update);
             this.Controls.Add(this.btn_add);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.label_username);
@@ -232,7 +220,6 @@
         private System.Windows.Forms.Label label_username;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button btn_add;
-        private System.Windows.Forms.Button btn_update;
         private System.Windows.Forms.Button btn_delete;
     }
 }
