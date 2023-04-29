@@ -109,6 +109,9 @@
     <EmbeddedResource Include="Source\Form_modifyStudent.resx">
       <DependentUpon>Form_modifyStudent.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Source\Form_nhanvien.resx">
+      <DependentUpon>Form_nhanvien.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Source\Form_scoreInput.resx">
       <DependentUpon>Form_scoreInput.cs</DependentUpon>
     </EmbeddedResource>

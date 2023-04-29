@@ -47,12 +47,22 @@ namespace BMCSDL_Lab3.Source
             {
                 cmd.Parameters.Add("@MASV", SqlDbType.NVarChar).Value = textBox_stuId.Text;
                 cmd.Parameters.Add("@HOTEN", SqlDbType.NVarChar).Value = textBox_fullname.Text;
-                cmd.Parameters.Add("@NGAYSINH", SqlDbType.DateTime).Value = textBox_bday.Text;
+                if (textBox_bday.Text == "")
+                    cmd.Parameters.Add("@NGAYSINH", SqlDbType.DateTime).Value = "04/30/1975";
+                else
+                    cmd.Parameters.Add("@NGAYSINH", SqlDbType.DateTime).Value = textBox_bday.Text;
                 cmd.Parameters.Add("@DIACHI", SqlDbType.NVarChar).Value = textBox_address.Text;
                 cmd.Parameters.Add("@MALOP", SqlDbType.VarChar).Value = textBox_classid.Text;
                 cmd.Parameters.Add("@TENDN", SqlDbType.NVarChar).Value = textBox_username.Text;
-                cmd.ExecuteNonQuery();
-                MessageBox.Show("Thêm thành công");
+                if (textBox_stuId.Text != "" && cmd.ExecuteNonQuery() > 0)
+                {
+                    MessageBox.Show("Thêm thành công");
+                }
+                else
+                {
+                    MessageBox.Show("Thao tác thêm không thể thực hiện");
+                }
+                
                 show_student();
             }
             catch (Exception ex)
@@ -69,22 +79,29 @@ namespace BMCSDL_Lab3.Source
                 cmd.Parameters.Add("@MASV", SqlDbType.NVarChar).Value = textBox_stuId.Text;
                 cmd.Parameters.Add("@HOTEN", SqlDbType.NVarChar).Value = textBox_fullname.Text;
 
-                if (!DateTime.TryParse(textBox_bday.Text, out DateTime DateValue)){
-                    MessageBox.Show("Invalid date time format.");
-                }
-                else {
-                    cmd.Parameters.Add("@NGAYSINH", SqlDbType.DateTime).Value = DateValue;
-                }
+                if (textBox_bday.Text == "")
+                    cmd.Parameters.Add("@NGAYSINH", SqlDbType.DateTime).Value = "04/30/1975";
+                else
+                    cmd.Parameters.Add("@NGAYSINH", SqlDbType.DateTime).Value = textBox_bday.Text;
+
                 cmd.Parameters.Add("@DIACHI", SqlDbType.NVarChar).Value = textBox_address.Text;
-                cmd.Parameters.Add("@MALOP", SqlDbType.VarChar).Value = textBox_classid.Text;
+                cmd.Parameters.Add("@MALOP", SqlDbType.NVarChar).Value = textBox_classid.Text;
                 cmd.Parameters.Add("@TENDN", SqlDbType.NVarChar).Value = textBox_username.Text;
-                cmd.ExecuteNonQuery();
-                MessageBox.Show("Update thành công");
+
+                if (textBox_stuId.Text != "" && cmd.ExecuteNonQuery() > 0)
+                {
+                    MessageBox.Show("Sửa thành công");
+                }
+                else
+                {
+                    MessageBox.Show("Thao tác sửa không thể thực hiện");
+                }
                 show_student();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Thao tác thêm không thể thực hiện");
+                //MessageBox.Show(ex.Message);
             }
         }
 
@@ -94,13 +111,20 @@ namespace BMCSDL_Lab3.Source
             try
             {
                 cmd.Parameters.Add("@MASV", SqlDbType.NVarChar).Value = textBox_stuId.Text;
-                cmd.ExecuteNonQuery();
-                MessageBox.Show("Xóa thành công");
+                if (textBox_stuId.Text != "" && cmd.ExecuteNonQuery() > 0)
+                {
+                    MessageBox.Show("Xóa thành công");
+                }
+                else
+                {
+                    MessageBox.Show("Thao tác xóa không thể thực hiện");
+                }
                 show_student();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Thao tác thêm không thể thực hiện");
+                //MessageBox.Show(ex.Message);
             }
         }
 
