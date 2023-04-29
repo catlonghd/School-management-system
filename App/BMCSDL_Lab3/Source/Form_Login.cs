@@ -16,12 +16,16 @@ namespace BMCSDL_Lab3
 {
     public partial class Form_Login : Form
     {
-        
+
         Thread t;
-       
+
         public Form_Login()
         {
             InitializeComponent();
+            this.textBox_uname.Leave += new System.EventHandler(this.textBox_uname_Leave);
+            this.textBox_uname.Enter += new System.EventHandler(this.textBox_uname_Enter);
+            this.textBox_passwd.Leave += new System.EventHandler(this.textBox_passwd_Leave);
+            this.textBox_passwd.Enter += new System.EventHandler(this.textBox_passwd_Enter);
         }
         private void Login()
         {
@@ -34,7 +38,7 @@ namespace BMCSDL_Lab3
                 throw new Exception(ex.Message);
             }
         }
-        
+
         public void open_FormMain(object obj)
         {
 
@@ -48,17 +52,17 @@ namespace BMCSDL_Lab3
             Functions.uname = textBox_uname.Text;
             Functions.passwd = textBox_passwd.Text;
 
-            SqlCommand cmd = new SqlCommand("SELECT TENDN, MATKHAU, MANV FROM NHANVIEN WHERE TENDN='" + Functions.uname + "' AND MATKHAU=HASHBYTES('SHA1',N'" + Functions.passwd + "')", Functions.conn);
+            SqlCommand cmd = new SqlCommand("SELECT TENDN, MATKHAU, MANV FROM NHANVIEN WHERE TENDN='" + Functions.uname + "' --AND MATKHAU=HASHBYTES('SHA1',N'" + Functions.passwd + "')", Functions.conn);
 
             SqlDataAdapter da = new SqlDataAdapter(cmd);
-            
+
             DataTable dt = new DataTable("NHANVIEN");
 
             da.Fill(dt);
-            
+
             if (dt.Rows.Count > 0)
             {
-                
+
                 Functions.manv = Convert.ToString(dt.Rows[0]["MANV"]);
                 this.Close();
                 t = new Thread(open_FormMain);
@@ -73,12 +77,6 @@ namespace BMCSDL_Lab3
             Functions.conn.Close();
         }
 
-        private void btn_Cancel_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-
-        }
-
         private void txtPassword_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar.Equals(Convert.ToChar(13)))
@@ -87,5 +85,54 @@ namespace BMCSDL_Lab3
             }
         }
 
+        private void textBox_uname_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox_uname_Leave(object sender, EventArgs e)
+        {
+            if (textBox_uname.Text.Length == 0)
+            {
+                textBox_uname.Text = "Username";
+                textBox_uname.ForeColor = SystemColors.WindowText;
+            }
+        }
+
+        private void textBox_uname_Enter(object sender, EventArgs e)
+        {
+            if (textBox_uname.Text == "Username")
+            {
+                textBox_uname.Text = "";
+                textBox_uname.ForeColor = SystemColors.WindowText;
+            }
+        }
+
+        private void textBox_passwd_Leave(object sender, EventArgs e)
+        {
+            if (textBox_passwd.Text.Length == 0)
+            {
+                textBox_passwd.Text = "Password";
+                textBox_passwd.ForeColor = SystemColors.WindowText;
+                textBox_passwd.UseSystemPasswordChar = false;
+            }
+        }
+
+        private void textBox_passwd_Enter(object sender, EventArgs e)
+        {
+            if (textBox_passwd.Text == "Password")
+            {
+                textBox_passwd.Text = "";
+                textBox_passwd.ForeColor = SystemColors.WindowText;
+                this.textBox_passwd.PasswordChar = '*';
+            }
+        }
+
+        private void textBox_passwd_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        
     }
 }

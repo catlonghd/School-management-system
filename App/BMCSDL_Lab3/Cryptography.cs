@@ -61,26 +61,27 @@ namespace BMCSDL_Lab3
             byte[] plaintext = rsa.Decrypt(textBytes, false);//giai ma rsa
             return ByteConverter.GetString(plaintext);
         }
-        public static string AES256 (string text, string key,bool IsEnc)
+        public static byte[] AES256 (string text, string key,bool IsEnc)
         {
             UnicodeEncoding ByteConverter = new UnicodeEncoding();
             byte[] TextBytes = ByteConverter.GetBytes(text);
             byte[] keyBytes = ByteConverter.GetBytes(key);
-            AesCryptoServiceProvider myAes = new AesCryptoServiceProvider();
+            Aes myAes = Aes.Create();
             myAes.KeySize = 256;
             myAes.Key = keyBytes;
             if(IsEnc)
             {
-                return ByteConverter.GetString(AESEnc(text, myAes.Key, myAes.IV));
+                return AESEnc(text, myAes.Key, myAes.IV);
             }
-            return AESDec(TextBytes, myAes.Key, myAes.IV);
+            return ByteConverter.GetBytes(AESDec(TextBytes, myAes.Key, myAes.IV));
         }
         public static byte[] AESEnc (string plaintext, byte[] key,byte[] IV)
         {
             byte[] encrypted;
-            AesCryptoServiceProvider enc = new AesCryptoServiceProvider();
+            Aes enc = Aes.Create();
             enc.Key = key;
             enc.IV = IV;
+            enc.Padding = PaddingMode.PKCS7;
             ICryptoTransform encryptor = enc.CreateEncryptor(enc.Key, enc.IV);
             using (MemoryStream msEncrypt = new MemoryStream())
             {
@@ -100,9 +101,10 @@ namespace BMCSDL_Lab3
         public static string AESDec(byte[] ciphertext, byte[] key, byte[] IV)
         {
             string decrypted;
-            AesCryptoServiceProvider dec = new AesCryptoServiceProvider();
+            Aes dec = Aes.Create();
             dec.Key = key;
             dec.IV = IV;
+            dec.Padding = PaddingMode.PKCS7;
             ICryptoTransform decryptor = dec.CreateDecryptor(dec.Key, dec.IV);
             using (MemoryStream msDecrypt = new MemoryStream(ciphertext))
             {
