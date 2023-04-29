@@ -33,17 +33,17 @@ namespace BMCSDL_Lab3.Source
             DataTable dt = new DataTable();
             da.Fill(dt);
 
-            DataColumn newColumn = new DataColumn("LUONG", typeof(string));
-            dt.Columns.Add(newColumn);
-            for (int i = 0; i < dt.Rows.Count; i++)
-            {
-                string luongBytes = dt.Rows[i]["LUONGCB"].ToString();
-                dt.Rows[i]["LUONG"] = Cryptography.AES256(luongBytes, "20120264", false);
-            }
-            if (dt.Columns.Contains("LUONGCB"))
-            {
-                dt.Columns.Remove("LUONGCB");
-            }
+            //DataColumn newColumn = new DataColumn("LUONG", typeof(string));
+            //dt.Columns.Add(newColumn);
+            //for (int i = 0; i < dt.Rows.Count; i++)
+            //{
+            //    string luongBytes = dt.Rows[i]["LUONGCB"].ToString();
+            //    dt.Rows[i]["LUONG"] = Cryptography.AES256(luongBytes, "20120264", false);
+            //}
+            //if (dt.Columns.Contains("LUONGCB"))
+            //{
+            //    dt.Columns.Remove("LUONGCB");
+            //}
             dataGridView1.DataSource = dt;
 
         }
@@ -62,10 +62,10 @@ namespace BMCSDL_Lab3.Source
                 cmd.Parameters.Add("@HOTEN", SqlDbType.NVarChar).Value = textBox_fullname.Text;
                 //string temp = Cryptography.AES256(textBox_passwd.Text, "20120264", true);
                 //MessageBox.Show(temp);
-                cmd.Parameters.Add("@LUONG", SqlDbType.VarBinary).Value = Cryptography.AES256(textBox_luong.Text, "20120264", true);
+                cmd.Parameters.Add("@LUONG", SqlDbType.VarBinary).Value = Cryptography.EncryptString("b14ca5898a4e4133bbce2ea2315a1916", textBox_luong.Text);
                 cmd.Parameters.Add("@EMAIL", SqlDbType.VarChar).Value = textBox_email.Text;
                 cmd.Parameters.Add("@TENDN", SqlDbType.NVarChar).Value = textBox_username.Text;
-                cmd.Parameters.Add("@MATKHAU", SqlDbType.VarBinary).Value = Cryptography.AES256(textBox_passwd.Text, "20120264", true);
+                cmd.Parameters.Add("@MATKHAU", SqlDbType.VarBinary).Value = Cryptography.EncryptString("b14ca5898a4e4133bbce2ea2315a1916", textBox_passwd.Text);
                 
                 if (textBox_manv.Text != "" && cmd.ExecuteNonQuery() > 0)
                 {
