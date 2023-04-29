@@ -23,7 +23,7 @@ namespace BMCSDL_Lab3.Source
         public void show_student_score()
         {
             //MessageBox.Show(Functions.manv);
-            SqlCommand cmd = new SqlCommand("student_score_list '" + Functions.manv + "',N'" + Functions.passwd +"'", Functions.conn);
+            SqlCommand cmd = new SqlCommand("student_score_list '" + Functions.manv + "',N'" + Functions.passwd + "'", Functions.conn);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
             da.Fill(dt);
@@ -42,14 +42,21 @@ namespace BMCSDL_Lab3.Source
                 cmd.Parameters.Add("@MASV", SqlDbType.NVarChar).Value = textBox_stuId.Text;
                 cmd.Parameters.Add("@MAHP", SqlDbType.VarChar).Value = textBox_mahp.Text;
                 cmd.Parameters.Add("@DIEM", SqlDbType.Int).Value = textBox_score.Text;
-                
-                cmd.ExecuteNonQuery();
-                MessageBox.Show("Thêm thành công");
+
+                if (textBox_stuId.Text != "" && cmd.ExecuteNonQuery() > 0)
+                {
+                    MessageBox.Show("Thêm thành công");
+                }
+                else
+                {
+                    MessageBox.Show("Thao tác thêm không thể thực hiện");
+                }
                 show_student_score();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Thao tác thêm không thể thực hiện");
+                //MessageBox.Show(ex.Message);
             }
         }
 
@@ -60,13 +67,22 @@ namespace BMCSDL_Lab3.Source
             {
                 cmd.Parameters.Add("@MASV", SqlDbType.NVarChar).Value = textBox_stuId.Text;
                 cmd.Parameters.Add("@MAHP", SqlDbType.NVarChar).Value = textBox_mahp.Text;
-                cmd.ExecuteNonQuery();
-                MessageBox.Show("Xóa thành công");
+                //cmd.ExecuteNonQuery();
+                //MessageBox.Show("Xóa thành công");
+                if (cmd.ExecuteNonQuery() != 0)
+                {
+                    MessageBox.Show("Xóa thành công");
+                }
+                else
+                {
+                    MessageBox.Show("Thao tác xóa không thể thực hiện");
+                }
                 show_student_score();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Thao tác xóa không thể thực hiện");
+                //MessageBox.Show(ex.Message);
             }
         }
 

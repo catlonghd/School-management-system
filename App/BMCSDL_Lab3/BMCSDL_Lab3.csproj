@@ -53,6 +53,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>QLSVNhomDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Source\Form_nhanvien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Source\Form_nhanvien.Designer.cs">
+      <DependentUpon>Form_nhanvien.cs</DependentUpon>
+    </Compile>
     <Compile Include="Source\Form_modifyStudent.cs">
       <SubType>Form</SubType>
     </Compile>
