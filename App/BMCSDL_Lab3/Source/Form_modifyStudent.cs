@@ -41,6 +41,7 @@ namespace BMCSDL_Lab3.Source
 
         private void btn_add_Click(object sender, EventArgs e)
         {
+            //SqlCommand cmd = new SqlCommand("SP_INS_SINHVIEN @MASV,@HOTEN,@NGAYSINH,@DIACHI,@MALOP,@TENDN", Functions.conn);
             SqlCommand cmd = new SqlCommand("SP_INS_SINHVIEN @MASV,@HOTEN,@NGAYSINH,@DIACHI,@MALOP,@TENDN", Functions.conn);
             try
             {

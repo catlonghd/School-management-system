@@ -9,7 +9,7 @@ namespace BMCSDL_Lab3
 {
     public class Cryptography
     {
-        public static string HashMD5 (string text)
+        public static string HashMD5(string text)
         {
             MD5 md5 = MD5.Create(); //tạo cài đặt hash bằng md5
             byte[] hash = md5.ComputeHash(Encoding.UTF8.GetBytes(text));//doi tu string qua bytes va hash bang md5
@@ -31,59 +31,33 @@ namespace BMCSDL_Lab3
             }
             return hashSb.ToString();
         }
-        public static string RSAAlg(string text)
+        public static string RSA_Agl(string text,string privatekey,bool IsEnc)
+        {
+            RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();//khoi tao dich vu rsa voi n,e,d duoc thu vien generate
+            rsa.FromXmlString(privatekey);// nhap vao nguon rsa vua duoc generate voi privatekey la gia tri cua rieng minh
+            RSAParameters priv = rsa.ExportParameters(true);//xuat thu priv key va kiem tra
+            
+            if (IsEnc)//neu ta can ma hoa
+            {
+                string cipher = RSAEncrypt(text, rsa);
+                return cipher;
+            }
+            string mess = RSADecrypt(text, rsa);
+            return text;
+        }
+        public static string RSAEncrypt(string plaintext, RSACryptoServiceProvider rsa)
+        {
+            UnicodeEncoding ByteConverter = new UnicodeEncoding(); // tao kieu du lieu de convert
+            byte[] textBytes = ByteConverter.GetBytes(plaintext);// convert string to bytes
+            byte[] ciphertext = rsa.Encrypt(textBytes, false);// ma hoa rsa
+            return ByteConverter.GetString(ciphertext);
+        }
+        public static string RSADecrypt(string ciphertext, RSACryptoServiceProvider rsa)
         {
             UnicodeEncoding ByteConverter = new UnicodeEncoding();
-            byte[] dataToEncrypt = ByteConverter.GetBytes(text);
-            byte[] encryptedData;
-            return "111";
-        }
-        public static byte[] RSAEncrypt(byte[] DataToEncrypt, RSAParameters RSAKeyInfo, bool DoOAEPPadding)
-        {
-            try
-            {
-                byte[] encryptedData;
-                //Create a new instance of RSACryptoServiceProvider.
-                RSA rsa = RSA.Create();
-
-            }
-            //Catch and display a CryptographicException  
-            //to the console.
-            catch (CryptographicException e)
-            {
-                Console.WriteLine(e.Message);
-
-                return null;
-            }
-        }
-
-        public static byte[] RSADecrypt(byte[] DataToDecrypt, RSAParameters RSAKeyInfo, bool DoOAEPPadding)
-        {
-            try
-            {
-                byte[] decryptedData;
-                //Create a new instance of RSACryptoServiceProvider.
-                using (RSACryptoServiceProvider RSA = new RSACryptoServiceProvider())
-                {
-                    //Import the RSA Key information. This needs
-                    //to include the private key information.
-                    RSA.ImportParameters(RSAKeyInfo);
-
-                    //Decrypt the passed byte array and specify OAEP padding.  
-                    //OAEP padding is only available on Microsoft Windows XP or
-                    //later.  
-                    decryptedData = RSA.Decrypt(DataToDecrypt, DoOAEPPadding);
-                }
-                return decryptedData;
-            }
-            //Catch and display a CryptographicException  
-            //to the console.
-            catch (CryptographicException e)
-            {
-                Console.WriteLine(e.ToString());
-
-                return null;
-            }
+            byte[] textBytes = ByteConverter.GetBytes(ciphertext);
+            byte[] plaintext = rsa.Decrypt(textBytes, false);//giai ma rsa
+            return ByteConverter.GetString(plaintext);
         }
 
     }
