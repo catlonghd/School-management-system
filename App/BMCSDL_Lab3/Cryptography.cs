@@ -33,13 +33,23 @@ namespace BMCSDL_Lab3
             }
             return hashSb.ToString();
         }
+        public static byte[] HexStringToByteArray(string hexString)
+        {
+            MemoryStream stream = new MemoryStream(hexString.Length / 2);
+
+            for (int i = 0; i < hexString.Length; i += 2)
+            {
+                stream.WriteByte(byte.Parse(hexString.Substring(i, 2), System.Globalization.NumberStyles.AllowHexSpecifier));
+            }
+            return stream.ToArray();
+        }
         public static string RSA_Agl(string text,string privatekey, string publickey,bool IsEnc)
         {
             RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();//khoi tao dich vu rsa voi n,e,d duoc thu vien generate
-            rsa.FromXmlString(privatekey+ publickey);// nhap vao nguon rsa vua duoc generate voi privatekey la gia tri cua rieng minh
+            RSAParameters rsap = new RSAParameters { D = HexStringToByteArray(privatekey), Modulus = HexStringToByteArray(publickey) };
+            //rsa.FromXmlString(privatekey+ publickey);// nhap vao nguon rsa vua duoc generate voi privatekey la gia tri cua rieng minh
 
-            RSAParameters priv = rsa.ExportParameters(true);//xuat thu priv key va kiem tra
-            RSAParameters publ = rsa.ExportParameters(false);//xuat thu public key va kiem tra
+            rsa.ImportParameters(rsap);
             if (IsEnc)//neu ta can ma hoa
             {
                 string cipher = RSAEncrypt(text, rsa);
