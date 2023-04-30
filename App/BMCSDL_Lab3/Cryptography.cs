@@ -62,78 +62,20 @@ namespace BMCSDL_Lab3
             byte[] plaintext = rsa.Decrypt(textBytes, false);//giai ma rsa
             return ByteConverter.GetString(plaintext);
         }
-        public static byte[] AES256 (string text, string key,bool IsEnc)
-        {
-            UnicodeEncoding ByteConverter = new UnicodeEncoding();
-            byte[] TextBytes = ByteConverter.GetBytes(text);
-            byte[] keyBytes = ByteConverter.GetBytes(key);
-            Aes myAes = Aes.Create();
-            myAes.KeySize = 256;
-            //myAes.Key = keyBytes;
-            MessageBox.Show(myAes.Key.ToString());
-            if(IsEnc)
-            {
-                return AESEnc(text, myAes.Key, myAes.IV);
-            }
-            return ByteConverter.GetBytes(AESDec(TextBytes, myAes.Key, myAes.IV));
-        }
-        public static byte[] AESEnc (string plaintext, byte[] key,byte[] IV)
-        {
-            byte[] encrypted;
-            Aes enc = Aes.Create();
-            enc.Key = key;
-            enc.IV = IV;
-            enc.Padding = PaddingMode.PKCS7;
-            ICryptoTransform encryptor = enc.CreateEncryptor(enc.Key, enc.IV);
-            using (MemoryStream msEncrypt = new MemoryStream())
-            {
-                using (CryptoStream csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
-                {
-                    using (StreamWriter swEncrypt = new StreamWriter(csEncrypt))
-                    {
-                        //Write all data to the stream.
-                        swEncrypt.Write(plaintext);
-                    }
-                    encrypted = msEncrypt.ToArray();
-                }
-            }
-            // Return the encrypted bytes from the memory stream.
-            return encrypted;
-        }
-        public static string AESDec(byte[] ciphertext, byte[] key, byte[] IV)
-        {
-            string decrypted;
-            Aes dec = Aes.Create();
-            dec.Key = key;
-            dec.IV = IV;
-            dec.Padding = PaddingMode.PKCS7;
-            ICryptoTransform decryptor = dec.CreateDecryptor(dec.Key, dec.IV);
-            using (MemoryStream msDecrypt = new MemoryStream(ciphertext))
-            {
-                using (CryptoStream csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))
-                {
-                    using (StreamReader srDecrypt = new StreamReader(csDecrypt))
-                    {
+        
 
-                        // Read the decrypted bytes from the decrypting stream
-                        // and place them in a string.
-                        decrypted = srDecrypt.ReadToEnd();
-                    }
-                }
-            }
-            // Return the encrypted bytes from the memory stream.
-            return decrypted;
-        }
-
-        public static string EncryptString(string key, string plainText)
+        public static byte[] AESEnc(string mykey, string plainText)
         {
             byte[] iv = new byte[16];
+            byte[] key = new Rfc2898DeriveBytes(mykey, iv, 1000).GetBytes(32);
             byte[] array;
 
             using (Aes aes = Aes.Create())
             {
-                aes.Key = Encoding.UTF8.GetBytes(key);
+                aes.Key = key;
                 aes.IV = iv;
+                aes.Padding = PaddingMode.PKCS7;
+                aes.Mode = CipherMode.CBC;
 
                 ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, aes.IV);
 
@@ -151,31 +93,36 @@ namespace BMCSDL_Lab3
                 }
             }
 
-            return Convert.ToBase64String(array);
+            return array;
         }
 
-        public static string DecryptString(string key, string cipherText)
+        public static string AESDec(string mykey, byte[] cipherText)
         {
             byte[] iv = new byte[16];
-            byte[] buffer = Convert.FromBase64String(cipherText);
+            byte[] key = new Rfc2898DeriveBytes(mykey, iv, 1000).GetBytes(32);
+            string plaintext = null;
 
             using (Aes aes = Aes.Create())
             {
-                aes.Key = Encoding.UTF8.GetBytes(key);
+                aes.Key = key;
                 aes.IV = iv;
+                //aes.Padding = PaddingMode.PKCS7;
+                aes.Mode = CipherMode.CBC;
                 ICryptoTransform decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
 
-                using (MemoryStream memoryStream = new MemoryStream(buffer))
+                using (MemoryStream memoryStream = new MemoryStream(cipherText))
                 {
                     using (CryptoStream cryptoStream = new CryptoStream((Stream)memoryStream, decryptor, CryptoStreamMode.Read))
                     {
-                        using (StreamReader streamReader = new StreamReader((Stream)cryptoStream))
+                        using (System.IO.StreamReader sr = new System.IO.StreamReader(cryptoStream))
                         {
-                            return streamReader.ReadToEnd();
+                            plaintext = sr.ReadToEnd();
                         }
                     }
                 }
+             
             }
+            return plaintext;
         }
     }
 }
