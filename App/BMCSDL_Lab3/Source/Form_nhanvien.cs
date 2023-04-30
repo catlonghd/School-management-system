@@ -28,7 +28,7 @@ namespace BMCSDL_Lab3.Source
         public void show_nhanvien()
         {
             //MessageBox.Show(Functions.manv);
-            SqlCommand cmd = new SqlCommand("SP_SEL_PUBLIC_ENCRYPT_NHANVIEN '" + Functions.manv + "','" + Functions.passwd + "'", Functions.conn);
+            SqlCommand cmd = new SqlCommand("SP_SEL_PUBLIC_ENCRYPT_NHANVIEN", Functions.conn);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
             da.Fill(dt);
@@ -45,7 +45,6 @@ namespace BMCSDL_Lab3.Source
             //    dt.Columns.Remove("LUONGCB");
             //}
             dataGridView1.DataSource = dt;
-
         }
         private void Form_modifyStudent_Load(object sender, EventArgs e)
         {
