@@ -33,17 +33,17 @@ namespace BMCSDL_Lab3.Source
             DataTable dt = new DataTable();
             da.Fill(dt);
 
-            //DataColumn newColumn = new DataColumn("LUONG", typeof(string));
-            //dt.Columns.Add(newColumn);
-            //for (int i = 0; i < dt.Rows.Count; i++)
-            //{
-            //    string luongBytes = dt.Rows[i]["LUONGCB"].ToString();
-            //    dt.Rows[i]["LUONG"] = Cryptography.AES256(luongBytes, "20120264", false);
-            //}
-            //if (dt.Columns.Contains("LUONGCB"))
-            //{
-            //    dt.Columns.Remove("LUONGCB");
-            //}
+            DataColumn newColumn = new DataColumn("LUONGCB", typeof(string));
+            dt.Columns.Add(newColumn);
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                byte[] luongBytes = (byte[])dt.Rows[i]["LUONG"];
+                dt.Rows[i]["LUONGCB"] = Cryptography.AESDec("20120264", luongBytes);
+            }
+            if (dt.Columns.Contains("LUONG"))
+            {
+                dt.Columns.Remove("LUONG");
+            }
             dataGridView1.DataSource = dt;
         }
         private void Form_modifyStudent_Load(object sender, EventArgs e)
@@ -61,10 +61,10 @@ namespace BMCSDL_Lab3.Source
                 cmd.Parameters.Add("@HOTEN", SqlDbType.NVarChar).Value = textBox_fullname.Text;
                 //string temp = Cryptography.AES256(textBox_passwd.Text, "20120264", true);
                 //MessageBox.Show(temp);
-                cmd.Parameters.Add("@LUONG", SqlDbType.VarBinary).Value = Cryptography.EncryptString("b14ca5898a4e4133bbce2ea2315a1916", textBox_luong.Text);
+                cmd.Parameters.Add("@LUONG", SqlDbType.VarBinary).Value = Cryptography.AESEnc("20120264", textBox_luong.Text);
                 cmd.Parameters.Add("@EMAIL", SqlDbType.VarChar).Value = textBox_email.Text;
                 cmd.Parameters.Add("@TENDN", SqlDbType.NVarChar).Value = textBox_username.Text;
-                cmd.Parameters.Add("@MATKHAU", SqlDbType.VarBinary).Value = Cryptography.EncryptString("b14ca5898a4e4133bbce2ea2315a1916", textBox_passwd.Text);
+                cmd.Parameters.Add("@MATKHAU", SqlDbType.VarBinary).Value = Cryptography.AESEnc("20120264", textBox_passwd.Text);
                 
                 if (textBox_manv.Text != "" && cmd.ExecuteNonQuery() > 0)
                 {
@@ -116,7 +116,7 @@ namespace BMCSDL_Lab3.Source
                 textBox_manv.Text = selectedRow.Cells["MANV"].Value.ToString();
                 textBox_fullname.Text = selectedRow.Cells["HOTEN"].Value.ToString();
                 textBox_email.Text = selectedRow.Cells["EMAIL"].Value.ToString();
-                textBox_luong.Text = selectedRow.Cells["LUONGCB"].Value.ToString();
+                textBox_luong.Text = selectedRow.Cells["LUONG"].Value.ToString();
    
             }
         }
@@ -132,25 +132,6 @@ namespace BMCSDL_Lab3.Source
             }
         }
 
-        //private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        //{
-        //    if(e.ColumnIndex == 3)
-        //    {
-        //        if(e.Value != null)
-        //        {
-        //            //dataGridView1.AutoGenerateColumns = false;
-        //            ImageConverter converter = new ImageConverter();
-        //            byte[] array = (byte[])converter.ConvertTo(e.Value, typeof(byte[]));
-        //            e.Value = BitConverter.ToString(array);
-        //            e.FormattingApplied = true;
-                    
-
-        //        }
-        //        else
-        //        {
-        //            e.FormattingApplied = false;
-        //        }
-        //    }
-        //}
+        
     }
 }
