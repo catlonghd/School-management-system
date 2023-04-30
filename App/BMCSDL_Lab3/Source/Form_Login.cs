@@ -51,8 +51,10 @@ namespace BMCSDL_Lab3
 
             Functions.uname = textBox_uname.Text;
             Functions.passwd = textBox_passwd.Text;
-
-            SqlCommand cmd = new SqlCommand("SELECT TENDN, MATKHAU, MANV FROM NHANVIEN WHERE TENDN='" + Functions.uname + "' --AND MATKHAU=HASHBYTES('SHA1',N'" + Functions.passwd + "')", Functions.conn);
+            byte[] mk = Cryptography.HashSHA1(Functions.passwd);
+            string hexString = BitConverter.ToString(mk).Replace("-", "");
+            string sqlVarbinary = "0x" + hexString;
+            SqlCommand cmd = new SqlCommand("SELECT TENDN, MATKHAU, MANV FROM NHANVIEN WHERE TENDN='" + Functions.uname + "' AND MATKHAU=" + sqlVarbinary, Functions.conn);
 
             SqlDataAdapter da = new SqlDataAdapter(cmd);
 

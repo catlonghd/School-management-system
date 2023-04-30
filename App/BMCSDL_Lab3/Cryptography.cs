@@ -11,7 +11,7 @@ namespace BMCSDL_Lab3
 {
     public class Cryptography
     {
-        public static string HashMD5(string text)
+        public static byte[] HashMD5(string text)
         {
             MD5 md5 = MD5.Create(); //tạo cài đặt hash bằng md5
             byte[] hash = md5.ComputeHash(Encoding.UTF8.GetBytes(text));//doi tu string qua bytes va hash bang md5
@@ -20,9 +20,9 @@ namespace BMCSDL_Lab3
             {
                 hashSb.Append(b.ToString("X2")); //chuoi duoc viet duoi dang 2 ky tu hex
             }
-            return hashSb.ToString();//chuoi duoc viet lai duoi dang dec
+            return hash;//chuoi duoc viet lai duoi dang dec
         }
-        public static string HashSHA1(string text)
+        public static byte[] HashSHA1(string text)
         {
             SHA1Managed sha1 = new SHA1Managed();
             byte[] hash = sha1.ComputeHash(Encoding.UTF8.GetBytes(text));
@@ -31,46 +31,7 @@ namespace BMCSDL_Lab3
             {
                 hashSb.Append(b.ToString("X2"));
             }
-            return hashSb.ToString();
-        }
-        public static byte[] HexStringToByteArray(string hexString)
-        {
-            MemoryStream stream = new MemoryStream(hexString.Length / 2);
-
-            for (int i = 0; i < hexString.Length; i += 2)
-            {
-                stream.WriteByte(byte.Parse(hexString.Substring(i, 2), System.Globalization.NumberStyles.AllowHexSpecifier));
-            }
-            return stream.ToArray();
-        }
-        public static string RSA_Agl(string text,string privatekey, string publickey,bool IsEnc)
-        {
-            RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();//khoi tao dich vu rsa voi n,e,d duoc thu vien generate
-            RSAParameters rsap = new RSAParameters { D = HexStringToByteArray(privatekey), Modulus = HexStringToByteArray(publickey) };
-            //rsa.FromXmlString(privatekey+ publickey);// nhap vao nguon rsa vua duoc generate voi privatekey la gia tri cua rieng minh
-
-            rsa.ImportParameters(rsap);
-            if (IsEnc)//neu ta can ma hoa
-            {
-                string cipher = RSAEncrypt(text, rsa);
-                return cipher;
-            }
-            string mess = RSADecrypt(text, rsa);
-            return text;
-        }
-        public static string RSAEncrypt(string plaintext, RSACryptoServiceProvider rsa)
-        {
-            UnicodeEncoding ByteConverter = new UnicodeEncoding(); // tao kieu du lieu de convert
-            byte[] textBytes = ByteConverter.GetBytes(plaintext);// convert string to bytes
-            byte[] ciphertext = rsa.Encrypt(textBytes, false);// ma hoa rsa
-            return ByteConverter.GetString(ciphertext);
-        }
-        public static string RSADecrypt(string ciphertext, RSACryptoServiceProvider rsa)
-        {
-            UnicodeEncoding ByteConverter = new UnicodeEncoding();
-            byte[] textBytes = ByteConverter.GetBytes(ciphertext);
-            byte[] plaintext = rsa.Decrypt(textBytes, false);//giai ma rsa
-            return ByteConverter.GetString(plaintext);
+            return hash;
         }
         
 
@@ -84,7 +45,6 @@ namespace BMCSDL_Lab3
             {
                 aes.Key = key;
                 aes.IV = iv;
-                aes.Padding = PaddingMode.PKCS7;
                 aes.Mode = CipherMode.CBC;
 
                 ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, aes.IV);
@@ -116,7 +76,7 @@ namespace BMCSDL_Lab3
             {
                 aes.Key = key;
                 aes.IV = iv;
-                //aes.Padding = PaddingMode.PKCS7;
+               
                 aes.Mode = CipherMode.CBC;
                 ICryptoTransform decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
 
@@ -134,5 +94,9 @@ namespace BMCSDL_Lab3
             }
             return plaintext;
         }
+
+
+
+
     }
 }

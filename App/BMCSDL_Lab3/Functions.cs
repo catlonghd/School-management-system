@@ -21,7 +21,7 @@ namespace BMCSDL_Lab3
         public static void InitConnection()
         {
             conn = new SqlConnection();
-            string hostname = "TIAYAYCER";
+            string hostname = @"LGG-TH-01\DANG";
             conn.ConnectionString = @"Data Source=" + hostname + ";Initial Catalog=QLSVNhom;Integrated Security=True";
             try { conn.Open(); }
             catch (SqlException ex){
