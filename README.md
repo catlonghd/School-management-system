@@ -1,2 +1,2 @@
-# Student-management-system
+# School-management-system
 
